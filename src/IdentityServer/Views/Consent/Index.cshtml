@@ -1,0 +1,58 @@
+﻿@model ConsentViewModel
+@{
+    ViewData["Title"] = "Consent";
+}
+
+<form asp-action="Index" class="signin">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <div class="text-center">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+    <div class="text-center fs-18">
+        <h3>
+            <span class="text-primary">@Model.ClientName</span>
+            is requesting your permission
+        </h3>
+    </div>
+
+    @if (Model.IdentityScopes.Any())
+    {
+        <div class="mt-3">
+            <p class="mb-1">Identity scopes:</p>
+            <ul class="list-group">
+                @foreach (var scope in Model.IdentityScopes)
+                {
+                    <partial name="_ScopeListItem" model="@scope" />
+                }
+            </ul>
+        </div>
+    }
+
+    @if (Model.ResourceScopes.Any())
+    {
+        <div class="mt-3">
+            <p class="mb-1">Resource scopes:</p>
+            <ul class="list-group">
+                @foreach (var scope in Model.ResourceScopes)
+                {
+                    <partial name="_ScopeListItem" model="scope" />
+                }
+            </ul>
+        </div>
+    }
+
+    @if (Model.AllowRememberConsent)
+    {
+        <div class="form-check form-check-inline mt-3 mb-3">
+            <input class="form-check-input" asp-for="RememberConsent" />
+            <label class="form-check-label" asp-for="RememberConsent"></label>
+        </div>
+    }
+
+    <div>
+        <button name="button" value="yes" class="btn btn-outline-primary w-100" autofocus>Yes, Allow</button>      
+    </div>
+    <div class="mt-3">
+        <button name="button" value="no" class="btn btn-outline-danger w-100">No, Do Not Allow</button>
+    </div>
+</form>

@@ -1,0 +1,16 @@
+﻿@page "/claims"
+@attribute [Authorize]
+<AuthorizeView>
+    <Authorized>
+        <h2>
+            User: <span class="text-primary">@context.User.Identity.Name</span>
+        </h2>
+        <h3>Claims:</h3>
+        <ul class="list-group">
+            @foreach (var claim in context.User.Claims)
+            {
+                <li class="list-group-item"><b>@claim.Type</b>: @claim.Value</li>
+            }
+        </ul>
+    </Authorized>
+</AuthorizeView>

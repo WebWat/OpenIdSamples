@@ -1,0 +1,19 @@
+﻿@model LogoutViewModel
+@{
+    ViewData["Title"] = "Logout";
+}
+
+<form asp-controller="Auth" asp-action="Logout" class="signin">
+    <input type="hidden" asp-for="LogoutId" />
+    <div class="text-center">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+    <div class="text-center fs-18 mt-1 mb-1">
+        <p>
+            Are you sure you want to log out of your account?
+        </p>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-outline-success w-100">Yes</button>
+    </div>
+</form>

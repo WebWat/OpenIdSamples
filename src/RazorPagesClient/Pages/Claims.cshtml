@@ -1,0 +1,39 @@
+﻿@page
+@model RazorPagesClient.Pages.ClaimsModel
+@{
+    ViewData["Title"] = "Claims";
+    int count = 1;
+}
+
+<h2>
+    User: <span class="text-primary">@User?.Claims?.FirstOrDefault(i => i.Type == "name").Value</span>
+</h2>
+<h3 class="font-weight-normal">Claims:</h3>
+<ul class="list-group">
+    @foreach (var claim in User?.Claims)
+    {
+        <li class="list-group-item"><b>@claim.Type</b>: @claim.Value</li>
+    }
+</ul>
+<hr />
+<h3 class="font-weight-normal mt-2">Cookies:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-auto">№</th>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in HttpContext.Request.Cookies)
+        {
+            <tr>
+                <th>@count</th>
+                <td>@claim.Key</td>
+                <td class="text-break">@claim.Value</td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>
