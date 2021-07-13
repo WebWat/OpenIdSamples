@@ -17,10 +17,9 @@ namespace IdentityServer.Data
                 await roleManager.CreateAsync(new IdentityRole("user"));
             }
 
-
             if (!userManager.Users.Any())
             {
-                //create user
+                // Create user.
                 var user = new IdentityUser
                 {
                     UserName = "user"                
@@ -38,8 +37,7 @@ namespace IdentityServer.Data
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                 });
 
-
-                //create admin
+                // Create admin.
                 var admin = new IdentityUser
                 {
                     UserName = "admin"

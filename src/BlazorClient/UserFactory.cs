@@ -10,7 +10,9 @@ namespace BlazorClient
     public class UserFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
     {
         public UserFactory(IAccessTokenProviderAccessor accessor) : base(accessor)
-        { }
+        { 
+        }
+
 
         public async override ValueTask<ClaimsPrincipal> CreateUserAsync(RemoteUserAccount account, 
                                                                          RemoteAuthenticationUserOptions options)
@@ -30,7 +32,7 @@ namespace BlazorClient
                         claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(kvp.Key));
 
                         var claims = element.EnumerateArray()
-                            .Select(x => new Claim(kvp.Key, x.ToString()));
+                                            .Select(x => new Claim(kvp.Key, x.ToString()));
 
                         claimsIdentity.AddClaims(claims);
                     }

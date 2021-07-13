@@ -13,8 +13,8 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.Controllers
 {
-    //Code from (slightly modified):
-    //https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/blob/main/Quickstart/Consent/ConsentController.cs
+    // Code from (slightly modified):
+    // https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/blob/main/Quickstart/Consent/ConsentController.cs
     [Authorize]
     [SecureHeaders]
     public class ConsentController : Controller

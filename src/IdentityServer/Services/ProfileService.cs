@@ -20,6 +20,7 @@ namespace IdentityServer.Data
             _claimsFactory = claimsFactory;
         }
 
+
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             var sub = context.Subject.GetSubjectId();
@@ -32,6 +33,7 @@ namespace IdentityServer.Data
 
             context.IssuedClaims = claims;
         }
+
 
         public async Task IsActiveAsync(IsActiveContext context)
         {

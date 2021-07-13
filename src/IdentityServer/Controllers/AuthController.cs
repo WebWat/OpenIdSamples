@@ -30,11 +30,11 @@ namespace IdentityServer.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Logout(LogoutViewModel vm)
+        public async Task<IActionResult> Logout(LogoutViewModel lvm)
         {
             await _signInManager.SignOutAsync();
 
-            var logoutRequest = await _interactionService.GetLogoutContextAsync(vm.LogoutId);
+            var logoutRequest = await _interactionService.GetLogoutContextAsync(lvm.LogoutId);
 
             if (string.IsNullOrEmpty(logoutRequest.PostLogoutRedirectUri))
             {
@@ -59,20 +59,18 @@ namespace IdentityServer.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginViewModel lvm)
         {
-            var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(lvm.Username, lvm.Password, false, false);
 
             if (result.Succeeded)
             {
-                return Redirect(vm.ReturnUrl);
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Wrong username or password");
+                return Redirect(lvm.ReturnUrl);
             }
 
-            return View(vm);
+            ModelState.AddModelError(string.Empty, "Wrong username or password");
+
+            return View(lvm);
         }
 
 
@@ -84,32 +82,30 @@ namespace IdentityServer.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel vm)
+        public async Task<IActionResult> Register(RegisterViewModel rvm)
         {
             if (!ModelState.IsValid)
             {
-                return View(vm);
+                return View(rvm);
             }
 
             var user = new IdentityUser
             {
-                UserName = vm.Username
+                UserName = rvm.Username
             };
 
-            var result = await _userManager.CreateAsync(user, vm.Password);
+            var result = await _userManager.CreateAsync(user, rvm.Password);
 
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
 
-                return Redirect(vm.ReturnUrl);
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "This username already exists");
+                return Redirect(rvm.ReturnUrl);
             }
 
-            return View(vm);
+            ModelState.AddModelError(string.Empty, "This username already exists");
+
+            return View(rvm);
         }
     }
 }

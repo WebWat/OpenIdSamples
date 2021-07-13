@@ -15,7 +15,7 @@ namespace RazorPagesClient.Pages
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            //Using the 'Logout' page in IdentityServer
+            // Using the 'Logout' page in IdentityServer.
             return SignOut(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectDefaults.AuthenticationScheme);
         }
     }

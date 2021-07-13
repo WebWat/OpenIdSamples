@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace IdentityServer.Filters
 {
-    //Code from:
-    //https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/blob/main/Quickstart/SecurityHeadersAttribute.cs
+    // Code from:
+    // https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/blob/main/Quickstart/SecurityHeadersAttribute.cs
     public class SecureHeadersAttribute : ActionFilterAttribute
     {
         public override void OnResultExecuting(ResultExecutingContext context)
